@@ -1,0 +1,5 @@
+{
+    "path": "/data",
+    "targetVersion": 5.4,
+    "buildIndexMap": true
+}
