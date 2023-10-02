@@ -2,8 +2,7 @@
     "version": 5.4,
     "dataPath": "/data",
     "dataList": [
-        "my-petpet",
-        "my-petpet123"
+        "my-petpet"
     ],
     "fontList": []
 }
