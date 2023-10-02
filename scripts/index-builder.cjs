@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const config = require('./config.json')
+const config = require('../config.json')
 
 const fontsPathName = 'fonts'
 const rootDir = process.cwd()
@@ -38,7 +38,7 @@ function buildDataIndexSync(dataPath) {
   try {
     fs.accessSync(fontsDirPath)
     fontsNames = listFilesSync(fontsDirPath)
-  } catch (e) {}
+  } catch (e) { }
 
   const jsonData = {
     version: config.targetVersion,
@@ -48,7 +48,7 @@ function buildDataIndexSync(dataPath) {
   }
 
   fs.writeFileSync(path.join(rootDir, 'index.json'), JSON.stringify(jsonData, null, 4))
-  
+
   if (!config.buildIndexMap) return
 
   const lengthIndex = {}
@@ -77,4 +77,8 @@ function buildDataIndexSync(dataPath) {
   fs.writeFileSync(path.join(rootDir, 'index.map.json'), indexMapJsonData)
 }
 
-buildDataIndexSync(config.path)
+try {
+  buildDataIndexSync(config.path)
+} catch (err) {
+  console.error('An error occurred:', err)
+}

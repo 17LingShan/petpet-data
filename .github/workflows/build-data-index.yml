@@ -1,4 +1,4 @@
-name: Build Data Index
+name: Build Data
 
 on:
   push:
@@ -22,8 +22,13 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Run builder script
-      run: node builder.cjs
+    - run: npm install
+
+    - name: Run unzip script
+      run: npm run unzip
+
+    - name: Run build index script
+      run: npm run buildIndex
 
     - uses: EndBug/add-and-commit@v9
       with:
