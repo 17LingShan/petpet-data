@@ -1,0 +1,40 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Unzip Workflow
+on:
+  push:
+    paths:
+      - '**.zip'
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Extract ZIP filename
+        id: extract-filename
+        run: |
+          echo "ZIP Filename: ${{ github.event.pusher.changes[0] }}"
+          echo "::set-output name=filename::${{ github.event.pusher.changes[0] }}"
+
+      - name: Get directory name
+        id: extract-directory
+        run: |
+          filename="${{ steps.extract-filename.outputs.filename }}"
+          directory="${{ filename##*/ }}"  # 提取文件名部分
+          directory="${{ directory%.* }}"  # 去除文件名的扩展名
+          echo "::set-output name=directory::${{ directory }}"
+
+      - name: Create target directory
+        run: |
+          mkdir -p data/${{ steps.extract-directory.outputs.directory }}
+
+      - name: Unzip
+        run: |
+          unzip ${{ steps.extract-filename.outputs.filename }} -d data/${{ steps.extract-directory.outputs.directory }}
+    
+
