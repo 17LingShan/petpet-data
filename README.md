@@ -1,6 +1,12 @@
 # Petpet Data
 
-依赖 **Github Action** 运行 `node builder.cjs` 实现推送时自动构建 Petpet Data
+## 自动构建索引
+
+依赖 **Github Action** 运行 `node index-builder.cjs` 实现推送时自动构建 Petpet Data
+
+## 自动解压模板
+
+依赖 **Github Action** 运行 `node unzip.cjs` 实现推送时自动解压 `/unzip` 目录文件并移动至 `/data`
 
 ## 标准
 
