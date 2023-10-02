@@ -19,12 +19,13 @@ async function extractZipFile(zipFilePath, extractToPath) {
 
 async function traverseAndExtract(directory) {
     const files = await fs.readdir(directory)
-
+    
+    
     for (const file of files) {
         const filePath = path.join(directory, file)
-
+        
         if (path.extname(file) !== '.zip') continue
-
+        fs.rmdir(destinationDirectory)
         await extractZipFile(filePath, destinationDirectory)
         fs.rm(filePath)
     }
